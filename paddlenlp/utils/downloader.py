@@ -131,7 +131,10 @@ def get_path_from_url(url, root_dir, md5sum=None, check_exist=True):
         logger.info("Found {}".format(fullpath))
     else:
         fullpath = _download(url, root_dir, md5sum)
-
+        
+    if fullpath[-5:] == ".json":
+        return fullpath
+        
     if tarfile.is_tarfile(fullpath) or zipfile.is_zipfile(fullpath):
         fullpath = _decompress(fullpath)
 
